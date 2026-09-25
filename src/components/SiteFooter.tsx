@@ -10,7 +10,7 @@ export default function SiteFooter() {
       <CmykBar />
       <div className="mx-auto grid w-full max-w-[1200px] gap-8 px-6 pb-12 pt-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
-          <img src="/assets/printabilya-logo-480.webp" alt="Printabilya" width={480} height={168} className="mb-4 h-[72px] w-auto" />
+          <img src={`${import.meta.env.BASE_URL}assets/printabilya-logo-480.webp`} alt="Printabilya" width={480} height={168} className="mb-4 h-[72px] w-auto" />
           <p>
             Printing and personalized merchandise from Mamburao, Occidental Mindoro: custom apparel, signage, stickers and
             promotional materials.

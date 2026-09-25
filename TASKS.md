@@ -14,6 +14,7 @@ Working task list. Updated at the end of each working session. Phase breakdown l
 - [x] 2026-09-25 — M1.1 — Tailwind v4 setup + base layout (see checkpoint log below)
 - [x] 2026-09-25 — Business address updated to `#9 H. Alcaide St., Brgy. Payompon, Mamburao, Occidental Mindoro` across `ContactDetails.tsx`, `SiteFooter.tsx`, `content/site-content.md`, `SPECS.md`, and design references (commit `84516e6`). ⚠️ Open: postal code — `5106` dropped from visible UI but still in `site-content.md` / `SPECS.md` / design files; Gian to confirm correct zip for Payompon (or remove)
 - [x] 2026-09-25 — `AGENTS.md`: added "Committing & task log" rule (prepare commits for Gian's approval; log work in `TASKS.md` at end of session)
+- [x] 2026-09-25 — Fixed missing logo on GitHub Pages: header/footer `<img>` used hardcoded `/assets/...` (site-root) paths, which 404 under the `/project_printa/` subpath. Now uses `import.meta.env.BASE_URL` in `SiteHeader.tsx` + `SiteFooter.tsx`; verified both builds (GH Pages → `project_printa/assets/...`, default → `/assets/...`). Needs `git push` to go live.
 
 ## In progress
 
@@ -27,6 +28,7 @@ Working task list. Updated at the end of each working session. Phase breakdown l
 - `src/components/LeadForm.tsx` — on `*.github.io` the form shows a “preview build — form isn't connected” note and short-circuits submit (no `/api` on Pages).
 - Verified locally: typecheck + lint green; `npm run build` (base `/`) and `GH_PAGES=1` build (base `/project_printa/`) both serve on `vite preview` (root + asset 200).
 - **Not yet live**: Gian to `git push` (repo pushes only from his machine).
+- 2026-09-25 — Logo 404 fix (`import.meta.env.BASE_URL` in header/footer): in this commit's changes; re-push to `master` deploys it.
 - ⚠️ Shared-workspace gotcha (2026-09-25): container and Windows machine share one `node_modules` via the bind mount — platform native bindings (`@rolldown/binding-*`, `@tailwindcss/oxide-*`, `lightningcss-*`) are per-OS. Rule of thumb: run `npm install` on whichever machine you're about to build. A still-running `npm run dev` locks the `.node` files across the mount and breaks the other side's install until it's closed.
 
 ## Up next — Phase 1 per `MILESTONES.md`

@@ -28,7 +28,7 @@ export default function SiteHeader() {
       <div className="mx-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between gap-6 px-6 md:h-[84px]">
         <Link to="/" aria-label="Printabilya home" className="shrink-0 no-underline">
           <img
-            src="/assets/printabilya-logo-480.webp"
+            src={`${import.meta.env.BASE_URL}assets/printabilya-logo-480.webp`}
             alt="Printabilya — Prints That Talk"
             width={480}
             height={168}
