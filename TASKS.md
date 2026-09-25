@@ -12,6 +12,8 @@ Working task list. Updated at the end of each working session. Phase breakdown l
 - [x] 2026-09-25 — Installed M1 dependencies: `tailwindcss` + `@tailwindcss/vite`, `react-router-dom`, `lucide-react`, fonts (`@fontsource/anton`, `@fontsource-variable/dm-sans`, `@fontsource/space-mono`)
 - [x] 2026-09-25 — Logo assets copied to `public/assets/` (`printabilya-logo-480.webp` + `printabilya-logo-full.png`); `public/favicon.svg` + `public/icons.svg` in place
 - [x] 2026-09-25 — M1.1 — Tailwind v4 setup + base layout (see checkpoint log below)
+- [x] 2026-09-25 — Business address updated to `#9 H. Alcaide St., Brgy. Payompon, Mamburao, Occidental Mindoro` across `ContactDetails.tsx`, `SiteFooter.tsx`, `content/site-content.md`, `SPECS.md`, and design references (commit `84516e6`). ⚠️ Open: postal code — `5106` dropped from visible UI but still in `site-content.md` / `SPECS.md` / design files; Gian to confirm correct zip for Payompon (or remove)
+- [x] 2026-09-25 — `AGENTS.md`: added "Committing & task log" rule (prepare commits for Gian's approval; log work in `TASKS.md` at end of session)
 
 ## In progress
 

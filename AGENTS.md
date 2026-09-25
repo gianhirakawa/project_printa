@@ -32,6 +32,11 @@ These are the guardrails for the Pi coding agent while working in this repositor
 - **Phase 1 only for now.** No ecommerce, cart, checkout, product variants, or payment integration — see `MILESTONES.md`. If a task starts pulling in that direction, stop and flag it rather than quietly scaffolding it.
 - Sections/nav items for future features (see `MILESTONES.md` Phase 2) should be visibly marked "Coming Soon" and non-functional — placeholders, not stubs that look finished.
 
+## Committing & task log
+
+- **When changes are done, prepare the commit and let Gian approve it.** Stage the right files, draft the commit message, and hold for his approval before it lands (don't commit unattended, don't push).
+- **Write down what was done in `TASKS.md`** at the end of each working session: dated entries under the matching section (`## Done`, `## In progress`), and move items between sections as their status changes.
+
 ## Deploys & infrastructure
 
 - No production deploy, domain change, or hosting-account change without explicit go-ahead in the session. Local/preview builds are fine at any time.
