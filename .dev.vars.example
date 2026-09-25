@@ -1,0 +1,5 @@
+# Secrets — local dev for Cloudflare Pages Functions (wrangler / vite plugin).
+# Copy to .dev.vars. NEVER commit real values; production uses Cloudflare Secrets.
+TURNSTILE_SECRET_KEY=
+SHEETS_WEBHOOK_URL=
+SHEETS_SHARED_SECRET=
