@@ -24,8 +24,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -35,7 +35,11 @@ jobs:
           # Sets Vite `base` to /project_printa/ (see vite.config.ts).
           # No secrets needed — the form is intentionally non-functional here.
           GH_PAGES: "1"
+      # enablement: true creates the Pages site automatically on the
+      # first deploy (the repo had none, so the Pages API returned 404).
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
