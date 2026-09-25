@@ -53,9 +53,9 @@ export default function SiteFooter() {
           <h4 className="mb-4 font-mono text-[12px] tracking-[0.16em] uppercase text-white">Visit or call</h4>
           <ul className="m-0 list-none p-0">
             <li>
-              National Road, Barangay 9,
+              #9 H. Alcaide St., Brgy. Payompon,
               <br />
-              Mamburao, Occidental Mindoro 5106
+              Mamburao, Occidental Mindoro
             </li>
             <li className="mt-2.5">
               <a href="tel:+639365555193" className={footerLink}>

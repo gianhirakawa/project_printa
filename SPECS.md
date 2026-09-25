@@ -6,7 +6,7 @@ Source material: `content/site-content.md` (all copy) and `content/leads-form-sc
 
 - **Name:** Printabilya
 - **Tagline / positioning:** "Prints That Talk"
-- **Location:** National Road, Barangay 9, Mamburao, Occidental Mindoro, Philippines 5106
+- **Location:** #9 H. Alcaide St., Brgy. Payompon, Mamburao, Occidental Mindoro, Philippines 5106
 - **Vibe:** local, trusted, fast, friendly, craft/studio-quality — not corporate. 4,300+ Facebook followers, 100% recommendation rate across 49 reviews.
 
 ## Site map

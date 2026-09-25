@@ -17,9 +17,9 @@ export default function ContactDetails() {
           <li className="flex gap-3">
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
             <span>
-              National Road, Barangay 9,
+              #9 H. Alcaide St., Brgy. Payompon,
               <br />
-              Mamburao, Occidental Mindoro 5106
+              Mamburao, Occidental Mindoro
             </span>
           </li>
           <li className="flex gap-3">

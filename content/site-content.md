@@ -10,7 +10,7 @@ Pulled directly from the Printabilya company profile (sourced from the Printabil
 
 ## About Us
 
-Printabilya is a printing and personalized merchandise business based on National Road, Barangay 9, Mamburao, Occidental Mindoro, Philippines. It has built a loyal local following — 4,300+ Facebook followers and a 100% recommendation rate across 49 customer reviews — on a reputation for fast turnaround and consistently high-quality output.
+Printabilya is a printing and personalized merchandise business based on #9 H. Alcaide St., Brgy. Payompon, Mamburao, Occidental Mindoro, Philippines. It has built a loyal local following — 4,300+ Facebook followers and a 100% recommendation rate across 49 customer reviews — on a reputation for fast turnaround and consistently high-quality output.
 
 The shop has grown its in-house equipment over time, most recently adding a UV printer to expand the range of custom products it can produce, alongside its existing sublimation printing line for apparel and other fabric-based items.
 
@@ -56,7 +56,7 @@ The shop has grown its in-house equipment over time, most recently adding a UV p
 
 | Detail | Info |
 |---|---|
-| Address | National Road, Barangay 9, Mamburao, Occidental Mindoro, Philippines 5106 |
+| Address | #9 H. Alcaide St., Brgy. Payompon, Mamburao, Occidental Mindoro, Philippines 5106 |
 | Phone | 0936 555 5193 |
 | Email | printabilya@gmail.com |
 | Facebook | facebook.com/printabilya |
