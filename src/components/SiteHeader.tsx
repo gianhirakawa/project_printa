@@ -15,14 +15,17 @@ const dropdownLink =
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const { pathname, hash } = useLocation();
 
-  // Close the mobile panel on any navigation (adjust state during render, not an effect)
+  // Close the mobile panel (and collapse its accordion) on any navigation
+  // (adjust state during render, not an effect)
   const locKey = `${pathname}${hash}`;
   const [seenKey, setSeenKey] = useState(locKey);
   if (locKey !== seenKey) {
     setSeenKey(locKey);
     if (open) setOpen(false);
+    if (servicesOpen) setServicesOpen(false);
   }
 
   return (
@@ -44,7 +47,10 @@ export default function SiteHeader() {
           aria-expanded={open}
           aria-controls="site-nav"
           aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            setOpen((v) => !v);
+            setServicesOpen(false);
+          }}
         >
           {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
@@ -56,30 +62,55 @@ export default function SiteHeader() {
             aria-label="Main"
             className="absolute inset-x-0 top-full flex flex-col gap-1 border-b border-ink-3 bg-ink px-6 pb-6 pt-3"
           >
-            <NavLink to="/" end className={pill}>
+            <NavLink to="/" end className={`${pill} w-full`}>
               Home
             </NavLink>
 
-            <div className="flex flex-col gap-1 pl-3 pt-1" role="group" aria-label="Services">
-              <span className="px-3 pt-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-gold">Services</span>
-              {services.map((s) => (
-                <Link key={s.slug} to={`/services/${s.slug}`} className={dropdownLink}>
-                  {s.shortTitle}
-                  <small className="block font-sans text-[13px] font-normal text-muted-ink">{s.shortDescription}</small>
-                </Link>
-              ))}
+            {/* Services: same pill as the other items; tap to expand the list */}
+            <button
+              type="button"
+              className={`${pill} w-full justify-between`}
+              aria-haspopup="true"
+              aria-expanded={servicesOpen}
+              onClick={() => setServicesOpen((v) => !v)}
+            >
+              Services
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${servicesOpen ? "rotate-180 text-gold" : ""}`}
+                aria-hidden="true"
+              />
+            </button>
+            <div
+              className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                servicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <div className="flex flex-col gap-1 border-l-2 border-brand-bright py-1.5 pl-3" role="group" aria-label="Services">
+                  {services.map((s) => (
+                    <NavLink
+                      key={s.slug}
+                      to={`/services/${s.slug}`}
+                      className={({ isActive }) => `${dropdownLink} ${isActive ? "bg-ink-3" : ""}`}
+                    >
+                      {s.shortTitle}
+                      <small className="block font-sans text-[13px] font-normal text-muted-ink">{s.shortDescription}</small>
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <NavLink to="/#about" className={pill}>
+            <NavLink to="/#about" className={`${pill} w-full`}>
               About
             </NavLink>
-            <NavLink to="/#quote" className={pill}>
+            <NavLink to="/#quote" className={`${pill} w-full`}>
               Contact
             </NavLink>
-            <span className={pill} aria-disabled="true">
+            <span className={`${pill} w-full justify-between`} aria-disabled="true">
               Shop <span className="badge-soon">Soon</span>
             </span>
-            <Button to="/#quote" sm className="mt-2.5">
+            <Button to="/#quote" sm className="mt-2.5 w-full">
               Get a quote
             </Button>
           </nav>
