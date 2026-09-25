@@ -6,7 +6,19 @@ import Button from "./Button.tsx";
 import CmykBar from "./CmykBar.tsx";
 
 const pill =
-  "inline-flex items-center gap-2 rounded-full px-3.5 py-2.5 font-mono text-[13px] font-bold uppercase tracking-[0.08em] text-cream no-underline hover:bg-white/10 hover:text-white";
+  "inline-flex items-center gap-2 rounded-full px-3.5 py-2.5 font-mono text-[13px] font-bold uppercase tracking-[0.08em] text-cream no-underline transition-transform duration-150 hover:scale-[1.05] hover:bg-white/10 hover:text-white";
+
+/* Same shape as the pill, but no hover treatment — the Shop placeholder is not interactive */
+const pillDisabled =
+  "inline-flex items-center gap-2 rounded-full px-3.5 py-2.5 font-mono text-[13px] font-bold uppercase tracking-[0.08em] text-cream no-underline";
+
+/* Current-item highlight — one shared treatment for every menu entry */
+const pillActiveDesktop =
+  "rounded-[999px_999px_6px_6px] bg-white/10 text-white shadow-[inset_0_-3px_0_var(--color-brand-bright)]";
+const pillActiveMobile =
+  "bg-white/10 text-white shadow-[inset_3px_0_0_var(--color-brand-bright)]";
+
+const cx = (...classes: Array<string | false | undefined>) => classes.filter(Boolean).join(" ");
 
 const dropdownLink =
   "block rounded-[10px] p-3 font-sans text-[15px] font-semibold no-underline hover:bg-ink-3";
@@ -23,6 +35,13 @@ export default function SiteHeader() {
     if (open) setOpen(false);
   }
 
+  // Current item — hash-aware so exactly one menu entry is highlighted at a time
+  // (NavLink matching ignores hashes, which used to light up both Home and About)
+  const homeActive = pathname === "/" && !hash;
+  const servicesActive = pathname.startsWith("/services") || hash === "#services";
+  const aboutActive = pathname === "/" && hash === "#about";
+  const contactActive = pathname === "/contact" || (pathname === "/" && hash === "#quote");
+
   return (
     <header className="site-header" id="top">
       <div className="mx-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between gap-6 px-6 md:h-[84px]">
@@ -32,7 +51,7 @@ export default function SiteHeader() {
             alt="Printabilya — Prints That Talk"
             width={480}
             height={168}
-            className="h-[50px] w-auto md:h-[62px]"
+            className="h-[50px] w-auto transition-transform duration-150 hover:scale-[1.04] md:h-[62px]"
           />
         </Link>
 
@@ -54,13 +73,7 @@ export default function SiteHeader() {
             aria-label="Main"
             className="absolute inset-x-0 top-full flex flex-col gap-1 border-b border-ink-3 bg-ink px-6 pb-6 pt-3"
           >
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                [pill, isActive && "bg-white/10 text-white shadow-[inset_3px_0_0_var(--color-brand-bright)]"].filter(Boolean).join(" ")
-              }
-            >
+            <NavLink to="/" end className={cx(pill, homeActive && pillActiveMobile)}>
               Home
             </NavLink>
 
@@ -74,13 +87,13 @@ export default function SiteHeader() {
               ))}
             </div>
 
-            <NavLink to="/#about" className={pill}>
+            <NavLink to="/#about" className={cx(pill, aboutActive && pillActiveMobile)}>
               About
             </NavLink>
-            <NavLink to="/#quote" className={pill}>
+            <NavLink to="/#quote" className={cx(pill, contactActive && pillActiveMobile)}>
               Contact
             </NavLink>
-            <span className={pill} aria-disabled="true">
+            <span className={pillDisabled} aria-disabled="true">
               Shop <span className="badge-soon">Soon</span>
             </span>
             <Button to="/#quote" sm className="mt-2.5">
@@ -91,23 +104,12 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="nav hidden items-center gap-1.5 md:flex" aria-label="Main">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              [
-                pill,
-                isActive && "rounded-[999px_999px_6px_6px] bg-white/10 text-white shadow-[inset_0_-3px_0_var(--color-brand-bright)]",
-              ]
-                .filter(Boolean)
-                .join(" ")
-            }
-          >
+          <NavLink to="/" end className={cx(pill, homeActive && pillActiveDesktop)}>
             Home
           </NavLink>
 
           <div className="nav__item relative">
-            <button type="button" className={pill} aria-haspopup="true" aria-expanded="false">
+            <button type="button" className={cx(pill, servicesActive && pillActiveDesktop)} aria-haspopup="true" aria-expanded="false">
               Services <ChevronDown className="h-4 w-4" aria-hidden="true" />
             </button>
             <div className="nav__menu absolute left-0 top-[calc(100%+8px)] min-w-[300px] rounded-md border border-ink-3 bg-ink-2 p-2.5 shadow-[0_20px_40px_rgba(0,0,0,0.45)]">
@@ -120,23 +122,13 @@ export default function SiteHeader() {
             </div>
           </div>
 
-          <NavLink
-            to="/#about"
-            className={({ isActive }) =>
-              [
-                pill,
-                isActive && "rounded-[999px_999px_6px_6px] bg-white/10 text-white shadow-[inset_0_-3px_0_var(--color-brand-bright)]",
-              ]
-                .filter(Boolean)
-                .join(" ")
-            }
-          >
+          <NavLink to="/#about" className={cx(pill, aboutActive && pillActiveDesktop)}>
             About
           </NavLink>
-          <NavLink to="/#quote" className={pill}>
+          <NavLink to="/#quote" className={cx(pill, contactActive && pillActiveDesktop)}>
             Contact
           </NavLink>
-          <span className={pill} aria-disabled="true">
+          <span className={pillDisabled} aria-disabled="true">
             Shop <span className="badge-soon">Soon</span>
           </span>
           <Button to="/#quote" sm className="ml-2.5">
