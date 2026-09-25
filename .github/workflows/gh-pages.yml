@@ -8,7 +8,7 @@ name: GitHub Pages (client preview)
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
