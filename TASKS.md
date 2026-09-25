@@ -29,6 +29,28 @@ Working task list. Updated at the end of each working session. Phase breakdown l
 
 ## Checkpoint log
 
+### 2026-09-25 (session 3) — M1.2–M1.7 content, leads form, function, QA ✅
+
+- **M1.2 Homepage** (`src/pages/Home.tsx`): full section stack per `design/homepage.html` — hero (from M1.1), services overview grid (4 `ServiceCard`s from `src/content/services.ts`), about/why section with proof points, `Testimonial` (Erica quote, verbatim from `site-content.md`), coming-soon band, quote section = `LeadForm` + `ContactDetails` side by side.
+- **M1.3 Service pages** (`src/pages/ServicePage.tsx` + `src/content/services.ts`): breadcrumbs, hero with accent-word sticker treatment + `PhotoPlaceholder` (portrait), offerings cards, gallery (3 placeholder tiles), how-to-order steps, other-services cross-links, CTA band (`/?service=<formValue>#quote` preselects the lead form chip via `?service=` query param). Copy derived from `site-content.md` bullets only.
+- **M1.4 Leads form + function**: `src/components/LeadForm.tsx` — service chips (controlled, `?service=` preselect), contact-method chips, source select, name/phone/email/details/consent, hidden honeypot, Cloudflare Turnstile (explicit render, dynamic script load, `execute()`+poll for token), client validation mirroring the function. `functions/api/lead.ts` — JSON parse → honeypot → Turnstile siteverify → field validation (same regexes as frontend) → POST to Apps Script `/exec` with `SHEETS_SHARED_SECRET`. `functions/tsconfig.json` (Workers types). Vite dev proxy `/api → :8788` (`wrangler pages dev`). Verified end-to-end locally: invalid JSON 400, bad phone/service 422, honeypot silent 200, valid lead passes Turnstile test key → 502 `save_failed` (expected: webhook not configured yet).
+- **M1.5 Coming soon** (`src/pages/Home.tsx`): Online store + Order tracking cards, marked non-functional, link to Facebook.
+- **M1.6 Contact** (`src/pages/Contact.tsx`): `/contact` route = heading + `LeadForm` + `ContactDetails` (address, phone, email, FB, hours note, map placeholder). Header "Contact" still targets `/#quote` per design.
+- **M1.7 QA/meta**:
+  - `usePageTitle(title, description?)` now sets per-route meta description too; every route passes its own title+description (service pages use per-service `metaDescription` from `services.ts`).
+  - Site-wide OG tags in `index.html` (`og:image` → `/og-image.png`).
+  - `scripts/generate-og-image.mjs` — dependency-free Node PNG encoder (5×7 bitmap font) producing `public/og-image.png` (1200×630, brand red, "PRINTS THAT TALK", CMYK stripe). Re-run with `npm run og`.
+  - `package.json`: `og` + `typecheck` scripts; `.pi/loop.json` verify now includes `npm run typecheck` (app + `functions/` tsconfig).
+- **Components**: `ServiceCard`, `Testimonial`, `ContactDetails`, `FacebookIcon` (inline SVG — lucide dropped brand icons), `CmykBar` accepts `className`.
+- **App**: `/services` → redirect to `/#services`; `ScrollToTop` handles in-page `#hash` (rAF + `scrollIntoView`) and resets scroll otherwise.
+- **Local dev**: `.env.local` (Turnstile test site key) + `.dev.vars` (test secret; sheet webhook empty until Apps Script is deployed) — both gitignored, `.env.example`/`.dev.vars.example` committed with names only.
+- **Verified**: `npm run lint`, `npm run typecheck`, `npm run build` all green; `vite preview` smoke test: `/`, `/services/apparel`, `/contact`, `/services`, `/og-image.png` all 200.
+- **Open (not blockers)**: deploy + real Turnstile keys + Apps Script webhook (`content/leads-form-schema.md` §deploy); prerendering decision (`MILESTONES.md` M1.9); real photos (designer placeholders stay obvious per AGENTS.md).
+
+**Next:** M1.8 deploy (needs Gian's go-ahead + Cloudflare project), then M2 per MILESTONES.md.
+
+---
+
 ### 2026-09-25 (session 2) — M1.1 base layout ✅
 
 M1.1 complete. Dev server verified on `http://localhost:5173/` (all modules compile, build passes).

@@ -256,6 +256,125 @@
   }
 }
 
+/* ---------- Lead form fields ---------------------------------------------- */
+@layer components {
+  .form-field { margin-bottom: 20px; }
+  .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .form-label small {
+    display: block;
+    font-weight: 400;
+    color: var(--color-muted-paper);
+  }
+  .form-input,
+  .form-textarea,
+  .form-select {
+    width: 100%;
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    padding: 12px 14px;
+  }
+  .form-input:focus,
+  .form-textarea:focus,
+  .form-select:focus {
+    border-color: var(--color-brand);
+    outline: 3px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+  .form-textarea { min-height: 110px; resize: vertical; }
+
+  /* Chip radio groups (service / preferred-contact) */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; }
+  .chip input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .chip span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 15px;
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    background: #fff;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .chip input:checked + span { background: var(--color-ink); color: var(--color-cream); }
+  .chip input:focus-visible + span { outline: 3px solid var(--color-gold); outline-offset: 2px; }
+
+  .form-error {
+    margin: 8px 0 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-brand);
+  }
+  .form-note { margin: 0 0 16px; font-size: 14px; color: var(--color-muted-paper); }
+
+  /* Honeypot: rendered but never visible to real visitors */
+  .honeypot { position: absolute; left: -9999px; }
+
+  .consent { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 20px; font-size: 14px; }
+  .consent input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--color-brand); }
+  .consent a { color: var(--color-brand); }
+
+  .turnstile-slot { min-height: 65px; margin-bottom: 4px; }
+
+  .form-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .form-banner--error { background: #fbe3e4; color: var(--color-brand-deep); }
+
+  /* Success state */
+  .form-success {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 12px;
+    min-height: 420px;
+    padding: 32px;
+    text-align: center;
+  }
+  .form-success .tick {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-gold);
+  }
+  .form-success h3 { font-size: 28px; }
+}
+
 /* ---------- Header / nav ------------------------------------------------- */
 @layer components {
   .site-header {

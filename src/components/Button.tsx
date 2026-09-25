@@ -14,6 +14,7 @@ interface ButtonProps {
   sm?: boolean;
   block?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
 const variantClass: Record<Variant, string> = {
@@ -35,6 +36,7 @@ export default function Button({
   sm,
   block,
   className = "",
+  onClick,
 }: ButtonProps) {
   const classes = [`btn`, variantClass[variant], sm && "btn--sm", block && "btn--block", className].filter(Boolean).join(" ");
 
@@ -54,7 +56,7 @@ export default function Button({
     );
   }
   return (
-    <button type={type} className={classes}>
+    <button type={type} className={classes} onClick={onClick}>
       {children}
     </button>
   );

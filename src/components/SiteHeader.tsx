@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { services } from "../content/services.ts";
@@ -15,10 +15,13 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { pathname, hash } = useLocation();
 
-  // Close the mobile panel on any navigation
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname, hash]);
+  // Close the mobile panel on any navigation (adjust state during render, not an effect)
+  const locKey = `${pathname}${hash}`;
+  const [seenKey, setSeenKey] = useState(locKey);
+  if (locKey !== seenKey) {
+    setSeenKey(locKey);
+    if (open) setOpen(false);
+  }
 
   return (
     <header className="site-header" id="top">
