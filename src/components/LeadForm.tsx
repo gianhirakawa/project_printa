@@ -4,6 +4,10 @@ import { useLocation } from "react-router-dom";
 import { services } from "../content/services.ts";
 import Button from "./Button.tsx";
 
+// GitHub Pages client preview — the /api/lead function only exists on
+// Cloudflare Pages, so the form can't deliver leads there.
+const IS_PREVIEW = typeof window !== "undefined" && window.location.hostname.endsWith(".github.io");
+
 const SERVICE_OPTIONS = [...services.map((s) => ({ value: s.formValue, label: s.shortTitle })), { value: "other", label: "Other / not sure" }];
 const CONTACT_METHODS = [
   { value: "call", label: "Call" },
@@ -132,6 +136,10 @@ export default function LeadForm() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (IS_PREVIEW) {
+      setStatus("error");
+      return;
+    }
     const form = e.currentTarget;
     const fd = new FormData(form);
     const data: Record<string, string> = Object.fromEntries(fd.entries()) as Record<string, string>;
@@ -200,6 +208,12 @@ export default function LeadForm() {
 
   return (
     <form noValidate onSubmit={onSubmit} ref={formRef}>
+      {IS_PREVIEW && (
+        <div className="form-banner form-banner--note" role="note">
+          <CircleAlert className="h-5 w-5 shrink-0" aria-hidden="true" />
+          <span>This is a preview build — the form isn't connected here.</span>
+        </div>
+      )}
       {status === "error" && (
         <div className="form-banner form-banner--error" role="alert">
           <CircleAlert className="h-5 w-5 shrink-0" aria-hidden="true" />

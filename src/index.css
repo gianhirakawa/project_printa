@@ -352,6 +352,7 @@
     font-weight: 700;
   }
   .form-banner--error { background: #fbe3e4; color: var(--color-brand-deep); }
+  .form-banner--note { background: var(--color-paper-2); color: var(--color-ink); }
 
   /* Success state */
   .form-success {

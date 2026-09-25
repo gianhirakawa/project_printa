@@ -1,0 +1,51 @@
+# Static client preview on GitHub Pages.
+#
+# This is a PREVIEW ONLY — the /api/lead Cloudflare Pages Function does not
+# run on GitHub Pages, so the leads form is shown as disconnected (a "preview
+# build" notice renders in the form). The real site deploys to Cloudflare
+# Pages per DEPLOY.md.
+name: GitHub Pages (client preview)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          # Sets Vite `base` to /project_printa/ (see vite.config.ts).
+          # No secrets needed — the form is intentionally non-functional here.
+          GH_PAGES: "1"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

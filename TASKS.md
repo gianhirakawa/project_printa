@@ -17,6 +17,16 @@ Working task list. Updated at the end of each working session. Phase breakdown l
 
 —
 
+## GitHub Pages client preview (added 2026-09-25, waiting on push)
+
+- `.github/workflows/gh-pages.yml` — on push to `main`: `npm ci` + build with `GH_PAGES=1`, deploy `dist/` to GitHub Pages (`https://gianhirakawa.github.io/project_printa/`). No secrets needed.
+- `vite.config.ts` — `base: "/project_printa/"` when `GH_PAGES=1` (asset paths under the user subpath); `/` everywhere else.
+- `src/main.tsx` — `HashRouter` on `*.github.io` (no SPA fallback on Pages), `BrowserRouter` otherwise.
+- `src/components/LeadForm.tsx` — on `*.github.io` the form shows a “preview build — form isn't connected” note and short-circuits submit (no `/api` on Pages).
+- Verified locally: typecheck + lint green; `npm run build` (base `/`) and `GH_PAGES=1` build (base `/project_printa/`) both serve on `vite preview` (root + asset 200).
+- **Not yet live**: Gian to `git push` (repo pushes only from his machine).
+- ⚠️ Shared-workspace gotcha (2026-09-25): container and Windows machine share one `node_modules` via the bind mount — platform native bindings (`@rolldown/binding-*`, `@tailwindcss/oxide-*`, `lightningcss-*`) are per-OS. Rule of thumb: run `npm install` on whichever machine you're about to build. A still-running `npm run dev` locks the `.node` files across the mount and breaks the other side's install until it's closed.
+
 ## Up next — Phase 1 per `MILESTONES.md`
 
 - [ ] M1.2 — Homepage (hero is already built as part of M1.1 — add About summary, services overview, why-choose, testimonial, leads-form sections)
@@ -26,6 +36,7 @@ Working task list. Updated at the end of each working session. Phase breakdown l
 - [ ] M1.6 — Contact & location
 - [ ] M1.7 — QA pass
 - [ ] M1.8 — Deploy (needs Gian's go-ahead)
+- [ ] GitHub Pages client preview — code ready (see section above); push + first Actions run outstanding
 
 ## Checkpoint log
 
