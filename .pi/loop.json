@@ -1,0 +1,14 @@
+{
+  "verify": [
+    "npm run lint",
+    "npm run build"
+  ],
+  "maxIterations": 8,
+  "stallLimit": 3,
+  "budgetMinutes": 30,
+  "maxOutputChars": 6000,
+  "commandTimeoutMinutes": 10,
+  "preflight": false,
+  "confirmBeforeRun": true,
+  "includeGitDiffInStallCheck": true
+}
